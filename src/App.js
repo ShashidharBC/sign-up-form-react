@@ -3,12 +3,17 @@ import "./App.css";
 import { useForm } from "react-hook-form";
 
 function App() {
-  const { register, handleSubmit } = useForm();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
   const [userInfo, setUserInfo] = useState();
 
   const onSubmit = (data) => {
     setUserInfo(data);
   };
+  console.log("Error is: ", errors);
 
   return (
     <div className="container">
@@ -23,27 +28,34 @@ function App() {
               type="text"
               name="username"
               placeholder="Username"
-              {...register("username", { required: true })}
+              {...register("username", {
+                required: "User name is required",
+              })}
             />
           </div>
+          <p>{errors?.username?.message}</p>
           <div className="field">
             <label>Email</label>
             <input
               type="email"
               name="email"
               placeholder="Email"
-              {...register("email", { required: true })}
+              {...register("email", { required: "User email is required" })}
             />
           </div>
+          <p>{errors?.username?.message}</p>
           <div className="field">
             <label>Password</label>
             <input
               type="password"
               name="password"
               placeholder="Password"
-              {...register("password", { required: true })}
+              {...register("password", {
+                required: "User password is required",
+              })}
             />
           </div>
+          <p>{errors?.username?.message}</p>
           <button className="fluid ui button blue">Submit</button>
         </div>
       </form>
